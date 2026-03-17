@@ -19,4 +19,4 @@ COPY server.py .
 COPY --from=frontend /app/dist ./dist
 
 EXPOSE 3000
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "3000"]
+CMD uvicorn server:app --host 0.0.0.0 --port ${PORT:-3000}
