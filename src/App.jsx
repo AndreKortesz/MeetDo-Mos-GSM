@@ -95,7 +95,7 @@ const CL = [
   {id:"done",t:"Готово",i:"✅",ac:"#059669",bg:"#ECFDF5"},
 ];
 const AC = {Андрей:"#4F46E5",Павел:"#D97706",Олеся:"#DB2777",Денис:"#059669",Ева:"#7C3AED",Команда:"#6B7280"};
-const TB = [{id:"brief",l:"Кратко",i:"⚡"},{id:"topics",l:"Темы",i:"📝"},{id:"gradation",l:"Градация",i:"📊"},{id:"finance",l:"Финансы",i:"💰"},{id:"next",l:"Повестка",i:"📅"}];
+const TB = [{id:"brief",l:"Кратко",i:"⚡"},{id:"topics",l:"Темы",i:"📝"},{id:"gradation",l:"Градация",i:"📊"},{id:"finance",l:"Финансы",i:"💰"},{id:"next",l:"Следующее собрание",i:"📅"}];
 
 const TBL = ({h,r}) => (
   <div style={{overflowX:"auto",borderRadius:10,border:"1px solid #E5E7EB"}}>
@@ -212,19 +212,13 @@ export default function App() {
       );
       case "next": return (
         <div>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-            <span style={{fontSize:12,color:"#9CA3AF"}}>Нажмите = проговорили</span>
-            <span style={{fontSize:12,fontFamily:"'JetBrains Mono',monospace",color:sN===tQ?"#059669":"#9CA3AF",fontWeight:600}}>{sN}/{tQ}</span>
-          </div>
-          {m.nextMeeting.map((q,i) => {
-            const s=iS(m.id,i);
-            return (
-              <div key={i} onClick={()=>tgS(m.id,i)} style={{display:"flex",gap:10,marginBottom:5,padding:"9px 12px",borderRadius:10,cursor:"pointer",transition:"all .15s",background:s?"#ECFDF5":i%2?"#FAFAFA":"#fff",border:s?"1px solid #A7F3D0":"1px solid transparent"}}>
-                <div style={{width:20,height:20,borderRadius:6,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",border:s?"2px solid #059669":"2px solid #D1D5DB",background:s?"#059669":"#fff",transition:"all .15s"}}>{s&&<span style={{color:"#fff",fontSize:12,fontWeight:700}}>✓</span>}</div>
-                <span style={{fontSize:13,lineHeight:1.5,color:s?"#9CA3AF":"#4B5563",textDecoration:s?"line-through":"none"}}>{q}</span>
-              </div>
-            );
-          })}
+          <div style={{fontSize:12,color:"#9CA3AF",marginBottom:12}}>Вопросы к следующему собранию</div>
+          {m.nextMeeting.map((q,i) => (
+            <div key={i} style={{display:"flex",gap:10,marginBottom:5,padding:"9px 12px",borderRadius:10,background:i%2?"#FAFAFA":"#fff"}}>
+              <span style={{background:"#EEF2FF",color:"#6366F1",fontSize:12,fontWeight:700,borderRadius:6,padding:"2px 8px",minWidth:26,textAlign:"center",flexShrink:0}}>{i+1}</span>
+              <span style={{fontSize:13,lineHeight:1.5,color:"#4B5563"}}>{q}</span>
+            </div>
+          ))}
         </div>
       );
       default: return null;
@@ -298,7 +292,7 @@ export default function App() {
           <div style={{display:"flex",justifyContent:"center",gap:6,padding:"8px 0",borderBottom:"1px solid #F3F4F6"}}>
             {MEETINGS.map((mt,i)=>(
               <button key={mt.id} onClick={()=>{setMI(i);setETp(null);setTab("brief");}}
-                style={{height:8,minWidth:8,borderRadius:10,border:"none",cursor:"pointer",transition:"all .2s",background:i===mI?"#F3C04D":"#E5E7EB",width:i===mI?"auto":8,padding:i===mI?"0 10px":0,fontSize:10,fontWeight:700,color:"#92400E",lineHeight:"8px"}}>{i===mI?mt.date.split(" ").slice(0,2).join(" "):""}</button>
+                style={{height:i===mI?22:8,minWidth:8,borderRadius:10,border:"none",cursor:"pointer",transition:"all .2s",background:i===mI?"#1A1A1A":"#E5E7EB",width:i===mI?"auto":8,padding:i===mI?"0 12px":0,fontSize:11,fontWeight:700,color:"#fff",lineHeight:"22px"}}>{i===mI?mt.date.split(" ").slice(0,2).join(" "):""}</button>
             ))}
           </div>
           {/* Tabs */}
@@ -313,7 +307,6 @@ export default function App() {
                   display:"flex",alignItems:"center",gap:5,whiteSpace:"nowrap",
                 }}>
                   <span>{t.i}</span>{t.l}
-                  {t.id==="next"&&tQ>0&&<span style={{marginLeft:3,fontSize:10,fontWeight:700,padding:"1px 5px",borderRadius:8,background:sN===tQ?"#D1FAE5":"#F3F4F6",color:sN===tQ?"#059669":"#9CA3AF"}}>{sN}/{tQ}</span>}
                 </button>
               );
             })}
