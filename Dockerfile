@@ -1,11 +1,11 @@
 # Stage 1: Build React
 FROM node:20-alpine AS frontend
 WORKDIR /app
-COPY package.json package-lock.json* ./
+COPY package.json ./
 RUN npm install
 COPY index.html vite.config.js ./
 COPY src/ ./src/
-COPY public/ ./public/
+RUN mkdir -p public
 RUN npm run build
 
 # Stage 2: Python server
