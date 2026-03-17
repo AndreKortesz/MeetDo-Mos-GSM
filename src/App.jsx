@@ -234,12 +234,15 @@ export default function App() {
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,flexWrap:"wrap"}}>
           {/* Logo */}
           <div style={{display:"flex",alignItems:"center",gap:mob?10:14}}>
+            <div style={{display:"flex",alignItems:"center",gap:mob?10:14,cursor:"pointer"}} onClick={()=>{setShowS(false);setET(null);setFilter("Все");setMergeMode(false);setMergeSel(new Set());}}>
             <img src={SIGN_URI} alt="Mos-GSM" style={{height:mob?32:38,width:"auto"}} />
             <div>
-              <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:mob?22:28,letterSpacing:"0.04em",color:"#1A1A1A",lineHeight:1}}>MEETDO</div>
+              <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:mob?22:28,letterSpacing:"0.04em",color:"#1A1A1A",lineHeight:1}}>
+                <span>Meet</span><span style={{color:"#D97706"}}>Do</span>
+              </div>
               <div style={{fontSize:10,color:"#9CA3AF",fontWeight:500,marginTop:2}}>by Mos-GSM</div>
             </div>
-          </div>
+            </div>
           {/* Stats + toggle */}
           <div style={{display:"flex",gap:8,alignItems:"center"}}>
             <div style={{background:"#F3F4F6",borderRadius:8,padding:"5px 12px",fontSize:13,fontFamily:"'JetBrains Mono',monospace"}}>
